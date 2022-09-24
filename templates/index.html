@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        body{
+            background: #99999a;
+        }
+        ul li{
+            cursor: pointer;
+            background: #eee;
+            height: 20px;
+            font-size: larger;
+            width: 95%;
+        }
+        ul li:nth-child(odd){
+            background: #636363;
+        }
+        button{
+            text-align: center;
+            cursor: pointer;
+            background: #3feee6;
+            border:2px solid #3feee6;
+            border-radius: 5px 5px 5px 5px;   
+        }
+        .container{
+            width: 100%;
+            display: flex;
+            float: left;
+            align-items: center;
+            justify-content: center;
+        }
+        form{
+            display: flex;
+            width: 700px;
+        }
+        form input{
+            flex:1;
+            border: 2px solid #3feee6;
+            border-radius: 5px 0 0 5px ;
+            border-right: none;
+            outline: none;
+            padding: 5px;
+            height: 20px;
+            width: 100%;    
+        }
+        form button{
+            border-radius: 0 5px 5px 0;
+            border-left: none;
+            cursor: pointer;
+        }
+        h2{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: xx-large;
+        }
+        a{
+            float: right;
+            color: red;
+            
+        }
+        
+    </style>
+</head>
+<body>
+    <h2>To Do List App</h2>
+    <div class="container">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="text" name="title" placeholder="Add Task here">
+                <button type="submit">Add Task</button>
+            </form>
+            </div>
+            <br><br>
+            <ul>
+                {% for todo in todos reversed %}
+                <li>{{todo.title | title}}
+                    <span>
+                        <a href="delete/{{todo.id}}" style="text-decoration: none; ">Delete</a>
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+</body>
+</html>
